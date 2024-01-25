@@ -1,4 +1,4 @@
-//let eventAuthor;
+let eventAuthor;
 document.getElementById('submitpoll').addEventListener('click', createSchedulePoll);
 document.getElementById('addDate').addEventListener('click', newDate);
 function createSchedulePoll() {
@@ -12,8 +12,6 @@ function createSchedulePoll() {
         alert('Please fill all options.');
         return;
     }
-
-    const dateOptions = dateOptionsInput.split(',').map(option => option.trim());
 
     const pollContainer = document.getElementById('pollContainer');
     const pollElement = document.createElement('div');
@@ -49,6 +47,9 @@ function createSchedulePoll() {
 
 
     pollElement.appendChild(buttonContainer);
+    submitButtonPoll.style.display = "none";
+    pollContainer.appendChild(pollElement);
+    createTable(dateOptionsInput);
 }
 
 function showEditFields(titleElement, descriptionElement) {
@@ -61,18 +62,10 @@ function showEditFields(titleElement, descriptionElement) {
     }
 }
 
-const dateCellsArray = [];
-
 function createTable(dateOptionsInput) {
     const dateOptions = dateOptionsInput.split(',').map(option => option.trim());
     const tableDisplay = document.querySelector(".tableinfo");
-
-    if (tableDisplay) {
-        tableDisplay.style.display = "flex";
-    } else {
-        console.error("Element with class 'tableheader' not found in the DOM.");
-    }
-
+    tableDisplay.style.display = "flex";
     const pollOptions = document.createElement('tr');
     dateOptions.forEach(option => {
         const th = document.createElement('th');
@@ -80,9 +73,20 @@ function createTable(dateOptionsInput) {
         pollOptions.appendChild(th);
     });
 
-    dateCellsArray.push([...pollOptions.children]);
+
 
     tableDisplay.appendChild(pollOptions);
     return pollOptions;
 }
 
+function newDate() {
+    const dateOptionsContainer = document.getElementById('alldatesubmit');
+
+    if (dateOptionsContainer) {
+        const newDateInput = document.createElement('input');
+        newDateInput.type = 'date';
+        dateOptionsContainer.appendChild(newDateInput);
+    } else {
+        console.error("Date options container not found in the DOM.");
+    }
+}

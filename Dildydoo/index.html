@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -9,25 +9,54 @@
   </head>
   <body>
     <div class="container">
+
+<head>
+  <meta charset="UTF-8" />
+  <!--<link rel="icon" type="image/svg+xml" href="/vite.svg" />-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Doodle Schedule Poll App</title>
+</head>
+
+<body>
+  <div class="container">
+
       <img class="logobanner" src="assets/logo.png">
       <h1>Dildydoo App by Hanen & Marvin</h1>
+      <div class="headPoll">
       <form id="pollForm">
+
         <label for="eventName">Event Name:</label>
         <input type="text" id="eventName" required>
 
         <label for="dateOptions">Date Options :</label>
         <input type="date" id="dateOptions" required>
-        
+
         <label for="dateOptions">Author :</label>
->>>>>>> dd668862bac9f67f89221df1732863406e1fb847
         <input type="text" id="AuthorEvent" required>
 
-        <label for="descriptionEvent">Description :</label>
+        <label for="dateOptions">Description :</label>
         <input type="text" id="descriptionEvent" required>
+        <div id="alldatesubmit">
+          <label for="dateOptions">Date Options :</label>
+          <input type="date" id="dateOptions" required>
 
         <!-- Add the "submitpoll" button -->
+        </div>
+        <button type="button" id="addDate">Add Date</button>
         <button type="button" id="submitpoll">Add Event</button>
       </form>
+    </div>
+    <div id="pollContainer"></div>
+    <div class="tableinfo">
+      <table class="tableInfo">
+        <thead class="tableheader">
+          <th>
+            Dates
+          </th>
+        </thead>
+        <tbody>
+          <td>
 
       <div id="pollContainer"></div>
       <div class="tableinfo">
@@ -43,7 +72,21 @@
           </tr>
         </table>
       </div>
+          </td>
+        </tbody>
+        <tfoot>
+          <td>
+            <input type="text" id="nameInputMore" placeholder="Enter name" required>
+            <button type="button" id="submitNameMore">Add</button>
+          </td>
+        </tfoot>
+      </table>
     </div>
     <script defer src="script.js"></script>
   </body>
+</html>
+  </div>
+  <script defer src="script.js"></script>
+</body>
+
 </html>
