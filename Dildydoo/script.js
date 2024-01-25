@@ -44,7 +44,6 @@ function createSchedulePoll() {
     const deleteButton = document.createElement('button');
     deleteButton.textContent = 'Delete';
     deleteButton.addEventListener('click', () => {
-
         pollElement.style.display = "none";
         submitButtonPoll.style.display = "flex";
     });
@@ -70,8 +69,6 @@ function showEditFields(titleElement, descriptionElement) {
     }
 }
 
-const dateCellsArray = [];
-
 function createTable(dateOptionsInput) {
     const dateOptions = dateOptionsInput.split(',').map(option => option.trim());
     const tableDisplay = document.querySelector(".tableinfo");
@@ -89,9 +86,6 @@ function createTable(dateOptionsInput) {
         pollOptions.appendChild(th);
     });
 
-    dateCellsArray.push([...pollOptions.children]);
-
     tableDisplay.appendChild(pollOptions);
     return pollOptions;
 }
-
