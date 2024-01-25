@@ -1,17 +1,17 @@
-//let eventAuthor;
+let eventAuthor;
 document.getElementById('submitpoll').addEventListener('click', createSchedulePoll);
+
 function createSchedulePoll() {
     const eventName = document.getElementById('eventName').value;
-    eventAuthor = document.getElementById('AuthorEvent').value;
+    const eventAuthor = document.getElementById('AuthorEvent').value;
     const eventDescription = document.getElementById('descriptionEvent').value;
     const dateOptionsInput = document.getElementById('dateOptions').value;
+    const submitButtonPoll = document.getElementById('submitpoll');
 
     if (!eventName || !eventAuthor || !eventDescription || !dateOptionsInput) {
         alert('Please fill all options.');
         return;
     }
-
-    const dateOptions = dateOptionsInput.split(',').map(option => option.trim());
 
     const pollContainer = document.getElementById('pollContainer');
     const pollElement = document.createElement('div');
@@ -24,16 +24,6 @@ function createSchedulePoll() {
     const pollDescription = document.createElement('p');
     pollDescription.textContent = `Description: ${eventDescription}`;
     pollElement.appendChild(pollDescription);
-
-    const pollOptions = document.createElement('ul');
-    dateOptions.forEach(option => {
-        const li = document.createElement('li');
-        li.textContent = option;
-        pollOptions.appendChild(li);
-    });
-
-    pollElement.appendChild(pollOptions);
-    pollContainer.appendChild(pollElement);
 
     // Add buttons
     const buttonContainer = document.createElement('div');
@@ -54,14 +44,20 @@ function createSchedulePoll() {
     const deleteButton = document.createElement('button');
     deleteButton.textContent = 'Delete';
     deleteButton.addEventListener('click', () => {
-        pollContainer.removeChild(pollElement);
+
+        pollElement.style.display = "none";
+        submitButtonPoll.style.display = "flex";
     });
 
     buttonContainer.appendChild(editButton);
     buttonContainer.appendChild(addButton);
     buttonContainer.appendChild(deleteButton);
 
+   
     pollElement.appendChild(buttonContainer);
+    submitButtonPoll.style.display = "none";
+    pollContainer.appendChild(pollElement);
+    createTable(dateOptionsInput);
 }
 
 function showEditFields(titleElement, descriptionElement) {
@@ -73,3 +69,29 @@ function showEditFields(titleElement, descriptionElement) {
         descriptionElement.textContent = `Description: ${editDescriptionInput}`;
     }
 }
+
+const dateCellsArray = [];
+
+function createTable(dateOptionsInput) {
+    const dateOptions = dateOptionsInput.split(',').map(option => option.trim());
+    const tableDisplay = document.querySelector(".tableinfo");
+
+    if (tableDisplay) {
+        tableDisplay.style.display = "flex";
+    } else {
+        console.error("Element with class 'tableheader' not found in the DOM.");
+    }
+
+    const pollOptions = document.createElement('tr');
+    dateOptions.forEach(option => {
+        const th = document.createElement('th');
+        th.textContent = option;
+        pollOptions.appendChild(th);
+    });
+
+    dateCellsArray.push([...pollOptions.children]);
+
+    tableDisplay.appendChild(pollOptions);
+    return pollOptions;
+}
+
