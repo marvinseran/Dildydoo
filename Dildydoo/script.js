@@ -1,6 +1,6 @@
 //let eventAuthor;
 document.getElementById('submitpoll').addEventListener('click', createSchedulePoll);
-
+document.getElementById('addDate').addEventListener('click', newDate);
 function createSchedulePoll() {
     const eventName = document.getElementById('eventName').value;
     const eventAuthor = document.getElementById('AuthorEvent').value;
@@ -37,25 +37,17 @@ function createSchedulePoll() {
         showEditFields(pollTitle, pollDescription);
     });
 
-    const addButton = document.createElement('button');
-    addButton.textContent = 'Modify date';
-    addButton.addEventListener('click', () => {
-        alert('Function to modify date to be implemented.');
-    });
-
     const deleteButton = document.createElement('button');
     deleteButton.textContent = 'Delete';
     deleteButton.addEventListener('click', () => {
-
         pollElement.style.display = "none";
         submitButtonPoll.style.display = "flex";
     });
 
     buttonContainer.appendChild(editButton);
-    buttonContainer.appendChild(addButton);
     buttonContainer.appendChild(deleteButton);
 
-   
+
     pollElement.appendChild(buttonContainer);
 }
 
@@ -68,3 +60,29 @@ function showEditFields(titleElement, descriptionElement) {
         descriptionElement.textContent = `Description: ${editDescriptionInput}`;
     }
 }
+
+const dateCellsArray = [];
+
+function createTable(dateOptionsInput) {
+    const dateOptions = dateOptionsInput.split(',').map(option => option.trim());
+    const tableDisplay = document.querySelector(".tableinfo");
+
+    if (tableDisplay) {
+        tableDisplay.style.display = "flex";
+    } else {
+        console.error("Element with class 'tableheader' not found in the DOM.");
+    }
+
+    const pollOptions = document.createElement('tr');
+    dateOptions.forEach(option => {
+        const th = document.createElement('th');
+        th.textContent = option;
+        pollOptions.appendChild(th);
+    });
+
+    dateCellsArray.push([...pollOptions.children]);
+
+    tableDisplay.appendChild(pollOptions);
+    return pollOptions;
+}
+
