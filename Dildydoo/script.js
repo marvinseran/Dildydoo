@@ -1,6 +1,6 @@
 let eventAuthor;
 document.getElementById('submitpoll').addEventListener('click', createSchedulePoll);
-
+document.getElementById('addDate').addEventListener('click', newDate);
 function createSchedulePoll() {
     const eventName = document.getElementById('eventName').value;
     const eventAuthor = document.getElementById('AuthorEvent').value;
@@ -35,12 +35,6 @@ function createSchedulePoll() {
         showEditFields(pollTitle, pollDescription);
     });
 
-    const addButton = document.createElement('button');
-    addButton.textContent = 'Modify date';
-    addButton.addEventListener('click', () => {
-        alert('Function to modify date to be implemented.');
-    });
-
     const deleteButton = document.createElement('button');
     deleteButton.textContent = 'Delete';
     deleteButton.addEventListener('click', () => {
@@ -49,10 +43,9 @@ function createSchedulePoll() {
     });
 
     buttonContainer.appendChild(editButton);
-    buttonContainer.appendChild(addButton);
     buttonContainer.appendChild(deleteButton);
 
-   
+
     pollElement.appendChild(buttonContainer);
     submitButtonPoll.style.display = "none";
     pollContainer.appendChild(pollElement);
@@ -72,13 +65,7 @@ function showEditFields(titleElement, descriptionElement) {
 function createTable(dateOptionsInput) {
     const dateOptions = dateOptionsInput.split(',').map(option => option.trim());
     const tableDisplay = document.querySelector(".tableinfo");
-
-    if (tableDisplay) {
-        tableDisplay.style.display = "flex";
-    } else {
-        console.error("Element with class 'tableheader' not found in the DOM.");
-    }
-
+    tableDisplay.style.display = "flex";
     const pollOptions = document.createElement('tr');
     dateOptions.forEach(option => {
         const th = document.createElement('th');
@@ -86,6 +73,21 @@ function createTable(dateOptionsInput) {
         pollOptions.appendChild(th);
     });
 
+
+
     tableDisplay.appendChild(pollOptions);
     return pollOptions;
 }
+
+function newDate() {
+    const dateOptionsContainer = document.getElementById('alldatesubmit');
+
+    if (dateOptionsContainer) {
+        const newDateInput = document.createElement('input');
+        newDateInput.type = 'date';
+        dateOptionsContainer.appendChild(newDateInput);
+    } else {
+        console.error("Date options container not found in the DOM.");
+    }
+}
+

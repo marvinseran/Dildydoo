@@ -100,3 +100,6 @@ button:focus-visible {
  .submitpoll{
   display: flex;
  }
+.headPoll{
+  display: flex;
+}
