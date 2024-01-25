@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Attendez que le DOM soit entièrement chargé avant d'exécuter le code
-
     function creatEvent(jsonResponse) {
         const eventContainer = document.getElementById('pollContainer');
     
