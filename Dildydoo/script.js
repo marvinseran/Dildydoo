@@ -1,15 +1,14 @@
 let eventAuthor;
-document.getElementById('submitpoll').addEventListener('click', createSchedulePoll);
+document.getElementById('btnEvent').addEventListener('click', createSchedulePoll);
 document.getElementById('addDate').addEventListener('click', newDate);
 function createSchedulePoll() {
-    const eventName = document.getElementById('eventName').value;
-    const eventAuthor = document.getElementById('AuthorEvent').value;
-    const eventDescription = document.getElementById('descriptionEvent').value;
+    const eventName = document.getElementById('newEventName').value;
+    const eventAuthor = document.getElementById('newEventAuthor').value;
+    const eventDescription = document.getElementById('newEventDescription').value;
     const dateOptionsInput = document.getElementById('dateOptions').value;
-    const submitButtonPoll = document.getElementById('submitpoll');
+    const submitButtonPoll = document.getElementById('btnEvent');
 
     if (!eventName || !eventAuthor || !eventDescription || !dateOptionsInput) {
-        alert('Please fill all options.');
         return;
     }
 

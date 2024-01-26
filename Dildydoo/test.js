@@ -1,117 +1,153 @@
-document.addEventListener('DOMContentLoaded', () => {
-    function creatEvent(jsonResponse) {
-        const eventContainer = document.getElementById('pollContainer');
-    
-        const eventDiv = document.createElement('div');
-        eventDiv.className = `event event_${jsonResponse.id}`;
-    
-        const eventName = document.createElement('h2');
-        eventName.class = 'firstEventName';
-        eventName.textContent = jsonResponse.name;
-    
-        const eventDescription = document.createElement('p');
-        eventDescription.className = 'firstEventDescription';
-        eventDescription.textContent = jsonResponse.description;
-    
-        const tableEvent = document.createElement('div');
-        tableEvent.className = 'tableEvent';
-    
-        const table = document.createElement('table');
-        table.className = 'Blue';
-        table.id = jsonResponse.id;
-    
-        tableEvent.appendChild(table);
-    
-        const tableHead = document.createElement('tableHead');
-        const tableHeadRow = document.createElement('tr');
-    
-        // gérer une logique en focntion des dates
-        
-    
-        const columnHeadDates = get(dates);
-        columnHeadDates.forEach(date => {
-          const tableHeadDate = document.createElement("th");
-          tableHeadDate.textContent = formatDate(date);
-          tableHeadRow.appendChild(tableHeadDate);
-        });
-    
-        const bodyTable = document.createElement('bodyTable');
-    
-        table.appendChild(tableHead);
-        table.appendChild(bodyTable);
-        eventDiv.appendChild(tableHead);
-        eventDiv.appendChild(eventName);
-        eventDiv.appendChild(eventDescription);
-        
-        
-        console.log("Avant d'ajouter eventDiv au DOM");
-    tableEvent.appendChild(eventDiv);
-    console.log("Après avoir ajouté eventDiv au DOM");
-    }
-    
+//import { editEvent } from './editEvent.js';
 
-    const formEl = document.querySelector('#form');
+//editEvent("Nouveau titre", "Nouvel auteur", "Nouvelle description");
 
-    formEl.addEventListener('submit', async (event) => {
-        event.preventDefault();
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        const formEl = document.querySelector('#form');
 
-        // Récupérez la valeur de l'élément 'newEventAuthor' s'il existe
-        const usernameInput = document.getElementById("newEventAuthor");
+        formEl.addEventListener('submit', async (event) => {
+            event.preventDefault();
 
-        if (usernameInput) {
-            const username = usernameInput.value;
-            console.log("Nom d'utilisateur:", username);
+            // Récupérez la valeur de l'élément 'newEventAuthor' s'il existe
+            const usernameInput = document.getElementById("newEventAuthor");
 
-            // Continuez avec le reste de votre traitement
-            const title = document.getElementById("newEventName").value;
-            const description = document.getElementById("newEventDescription").value;
+            if (usernameInput) {
+                const username = usernameInput.value;
+                console.log("Nom d'utilisateur:", username);
 
-            try {
-                console.log('Avant de récupérer dateOptionsInput');
-                let dateOptionsInput = document.querySelector('.dateOptions');
-                console.log('Après avoir récupéré dateOptionsInput');
+                // Continuez avec le reste de votre traitement
+                const title = document.getElementById("newEventName").value;
+                const description = document.getElementById("newEventDescription").value;
 
-                if (dateOptionsInput) {
-                    let dateArray = [];
-                    dateArray.push(dateOptionsInput.value);
-                    console.log("Dates:", dateArray);
+                try {
+                    console.log('Avant de récupérer dateOptionsInput');
+                    let dateOptionsInput = document.querySelector('#dateOptions');
+                    console.log('Après avoir récupéré dateOptionsInput');
 
-                    let response = await fetch('http://localhost:3000/api/events/', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            name: title,
-                            dates: dateArray,
-                            author: username,
-                            description: description,
-                        }),
-                    });
+                    if (dateOptionsInput) {
+                        let dateArray = [];
+                        dateArray.push(dateOptionsInput.value);
+                        console.log("Dates:", dateArray);
 
-                    if (!response.ok) {
-                        throw new Error(`Erreur HTTP! Status: ${response.status}`);
+                        let response = await fetch('http://localhost:3000/api/events/', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                name: title,
+                                dates: dateArray,
+                                author: username,
+                                description: description,
+                            }),
+                        });
+
+                        if (!response.ok) {
+                            throw new Error(`Erreur HTTP! Status: ${response.status}`);
+                        }
+
+                        // Analyser la réponse comme JSON
+                        const jsonResponsePost = await response.json();
+                        createEvent(jsonResponsePost);
+
+                        // Traitement de la réponse réussie ici, par exemple, redirection ou affichage d'un message de succès
+                    } else {
+                        console.error("L'élément avec l'ID 'dateOptions' n'a pas été trouvé.");
                     }
-                    // Analyser la réponse comme JSON
-                    const jsonResponse = await response.json();
-                    creatEvent(jsonResponse);
-                    // Utilisez jsonResponse comme objet JSON
-                    console.log('Réponse JSON:', jsonResponse.id);
-
-
-                    // Traitement de la réponse réussie ici, par exemple, redirection ou affichage d'un message de succès
-                } else {
-                    console.error("L'élément avec l'ID 'dateOptions' n'a pas été trouvé.");
+                } catch (error) {
+                    console.error('Erreur lors de la soumission du formulaire:', error);
+                    // Gérer l'erreur, afficher un message à l'utilisateur, etc.
                 }
+            } else {
+                console.error("L'élément avec l'ID 'newEventAuthor' n'a pas été trouvé.");
+            }
+        });
+
+        // Fonction pour créer un événement
+        function createEvent(jsonResponsePost) {
+            const menu = document.getElementById('pollContainer');
+
+            const eventDiv = document.createElement('div');
+            eventDiv.className = `event event_${jsonResponsePost.id}`;
+
+            const eventName = document.createElement('h2');
+            eventName.className = 'firstEventName';
+            eventName.textContent = jsonResponsePost.name;
+
+            const eventDescription = document.createElement('p');
+            eventDescription.className = 'firstEventDescription';
+            eventDescription.textContent = jsonResponsePost.description;
+
+            const tableEvent = document.createElement('div');
+            tableEvent.className = 'tableEvent';
+
+            const table = document.createElement('table');
+            table.className = 'Blue';
+            table.id = jsonResponsePost.id;
+
+            const tableHead = document.createElement('thead');
+            const tableHeadRow = document.createElement('tr');
+
+            // gérer une logique pour les dates
+
+            const columnHeadDates = jsonResponsePost.dates;
+            columnHeadDates.forEach(date => {
+                const tableHeadDate = document.createElement("th");
+                tableHeadDate.textContent = formatDate(date);
+                tableHeadRow.appendChild(tableHeadDate);
+            });
+
+            const bodyTable = document.createElement('tbody');
+
+            tableHead.appendChild(tableHeadRow);
+            table.appendChild(tableHead);
+            table.appendChild(bodyTable);
+            eventDiv.appendChild(tableEvent);
+            tableEvent.appendChild(table);
+            eventDiv.appendChild(eventName);
+            eventDiv.appendChild(eventDescription);
+
+            console.log("Avant d'ajouter eventDiv au DOM");
+            menu.appendChild(eventDiv);
+            console.log("Après avoir ajouté eventDiv au DOM");
+        }
+
+        async function displayAllEvents() {
+            try {
+                const responseGet = await fetch('http://localhost:3000/api/events/', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                });
+
+                if (!responseGet.ok) {
+                    throw new Error(`Erreur HTTP! Status: ${response.status}`);
+                }
+
+                // Analyser la réponse comme JSON
+                const AllData = await responseGet.json();
+                console.log("AllData", AllData);
+
+                // Utiliser les données récupérées (par exemple, stocker dans AllData)
+                // AllData = data; // This line is commented out as AllData is already declared
+                // console.log(AllData);
             } catch (error) {
-                console.error('Erreur lors de la soumission du formulaire:', error);
+                console.error('Error', error);
                 // Gérer l'erreur, afficher un message à l'utilisateur, etc.
             }
-
-        } else {
-            console.error("L'élément avec l'ID 'newEventAuthor' n'a pas été trouvé.");
         }
-    });
 
+        // Fonction pour formater la date
+        function formatDate(dateString) {
+            return dateString;
+        }
+
+        // Call the displayAllEvents function
+        await displayAllEvents();
+    } catch (error) {
+        console.error('Error', error);
+        // Gérer l'erreur, afficher un message à l'utilisateur, etc.
+    }
 });
-
