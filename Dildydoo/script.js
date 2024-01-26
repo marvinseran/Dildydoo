@@ -1,7 +1,10 @@
+document.addEventListener('DOMContentLoaded', async () => {
+    const dateArray = [];
 let eventAuthor;
 document.getElementById('btnEvent').addEventListener('click', createSchedulePoll);
 document.getElementById('addDate').addEventListener('click', newDate);
-function createSchedulePoll() {
+function createSchedulePoll(e) {
+    e.preventDefault();
     const eventName = document.getElementById('newEventName').value;
     const eventAuthor = document.getElementById('newEventAuthor').value;
     const eventDescription = document.getElementById('newEventDescription').value;
@@ -49,6 +52,9 @@ function createSchedulePoll() {
     submitButtonPoll.style.display = "none";
     pollContainer.appendChild(pollElement);
     createTable(dateOptionsInput);
+    dateArray.push(dateOptionsInput); 
+
+    createTable(dateArray);
 }
 
 function showEditFields(titleElement, descriptionElement) {
@@ -61,21 +67,28 @@ function showEditFields(titleElement, descriptionElement) {
     }
 }
 
-function createTable(dateOptionsInput) {
-    const dateOptions = dateOptionsInput.split(',').map(option => option.trim());
+function createTable(dateArray) {
     const tableDisplay = document.querySelector(".tableinfo");
     tableDisplay.style.display = "flex";
-    const pollOptions = document.createElement('tr');
-    dateOptions.forEach(option => {
-        const th = document.createElement('th');
-        th.textContent = option;
-        pollOptions.appendChild(th);
+
+    // Créez une nouvelle colonne avec la date de l'input en première ligne
+    const pollOptions = document.createElement('td');
+    const th = document.createElement('th');
+    th.textContent = dateArray[dateArray.length - 1]; // Prenez la dernière date ajoutée
+    pollOptions.appendChild(th);
+
+    // Ajoutez la nouvelle colonne à chaque ligne du tableau
+    const tableRows = document.querySelectorAll('.tableInfo tbody tr');
+    tableRows.forEach(row => {
+        const td = document.createElement('td');
+        row.appendChild(td);
     });
 
-
-
-    tableDisplay.appendChild(pollOptions);
-    return pollOptions;
+    // Ajoutez la nouvelle colonne à l'en-tête du tableau
+    const tableHeader = document.querySelector('.tableheader th:last-child');
+    const newHeader = document.createElement('th');
+    newHeader.textContent = dateArray[dateArray.length - 1];
+    tableHeader.after(newHeader);
 }
 
 function newDate() {
@@ -89,3 +102,5 @@ function newDate() {
         console.error("Date options container not found in the DOM.");
     }
 }
+
+});

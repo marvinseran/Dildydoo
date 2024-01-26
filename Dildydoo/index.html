@@ -1,58 +1,48 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
-    <!--<link rel="icon" type="image/svg+xml" href="/vite.svg" />-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <script defer src="script.js" type="module"></script>
+
     <title>Dildydoo App by Hanen & Marvin</title>
-  </head>
-
+</head>
 <body>
-  <div class="container">
+    <div class="container">
+        <img class="logobanner" src="assets/logo.png">
+        <h1>Dildydoo App by Hanen & Marvin</h1>
+        <div class="headPoll">
+            <form id="form">
+                <label>Event Name:</label>
+                <input type="text" id="newEventName" required>
 
-      <img class="logobanner" src="assets/logo.png">
-      <h1>Dildydoo App by Hanen & Marvin</h1>
-      <div class="headPoll">
-      <form id="form">
+                <label>Author :</label>
+                <input type="text" id="newEventAuthor" required>
 
-        <label>Event Name:</label>
-        <input type="text" id="newEventName" required>
-
-        <label>Author :</label>
-        <input type="text" id="newEventAuthor" required>
-
-        <label>Description :</label>
-        <input type="text" id="newEventDescription" required>
-        <div id="alldatesubmit">
-          <label for="dateOptions">Date Options :</label>
-          <input type="date" id="dateOptions" required>
-
-        <!-- Add the "submitpoll" button -->
+                <label>Description :</label>
+                <input type="text" id="newEventDescription" required>
+                <div id="alldatesubmit">
+                    <label for="dateOptions">Date Options :</label>
+                    <input type="date" id="dateOptions" required>
+                </div>
+                <button type="button" id="addDate">Add Date</button>
+                <button type="submit" id="btnEvent">Add Event</button>
+            </form>
         </div>
-        <button type="button" id="addDate">Add Date</button>
-        <button type="submit" id="btnEvent">Add Event</button>
-      </form>
+        <div id="pollContainer"></div>
+        <div class="tableinfo">
+            <table class="tableInfo">
+                <thead class="tableheader">
+                    <th>
+                        Dates
+                    </th>
+                </thead>
+                <tbody id="datesTableBody">
+                    <!-- Les dates ajoutées seront affichées ici -->
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div id="pollContainer"></div>
-    <div class="tableinfo">
-      <table class="tableInfo">
-        <thead class="tableheader">
-          <th>
-            Dates
-          </th>
-        </thead>
-        <tbody>
-          <td>
-
-   <!--X  <div id="eventSelected"></div>  -->
-            <input type="text" id="nameInputMore" placeholder="Enter name" required>
-            <button type="button" id="submitNameMore">Add</button>
-          </td>
-        </tfoot>
-      </table>
-    </div>
-    
-  </body>
+    <script defer src="script.js" type="module"></script>
+</body>
 </html>

@@ -1,10 +1,8 @@
-//import { editEvent } from './editEvent.js';
-
-//editEvent("Nouveau titre", "Nouvel auteur", "Nouvelle description");
-
 document.addEventListener('DOMContentLoaded', async () => {
     try {
         const formEl = document.querySelector('#form');
+        const datesTableBody = document.querySelector('#datesTableBody');
+        const dateArray = []; // Tableau pour stocker les dates ajoutées
 
         formEl.addEventListener('submit', async (event) => {
             event.preventDefault();
@@ -26,9 +24,15 @@ document.addEventListener('DOMContentLoaded', async () => {
                     console.log('Après avoir récupéré dateOptionsInput');
 
                     if (dateOptionsInput) {
-                        let dateArray = [];
-                        dateArray.push(dateOptionsInput.value);
+                        dateArray.push(dateOptionsInput.value); // Ajoutez la date au tableau
                         console.log("Dates:", dateArray);
+
+                        // Créez un élément de tableau pour chaque date
+                        const newRow = document.createElement('tr');
+                        const newCell = document.createElement('td');
+                        newCell.textContent = dateOptionsInput.value;
+                        newRow.appendChild(newCell);
+                        datesTableBody.appendChild(newRow);
 
                         let response = await fetch('http://localhost:3000/api/events/', {
                             method: 'POST',
@@ -50,6 +54,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                         // Analyser la réponse comme JSON
                         const jsonResponsePost = await response.json();
                         createEvent(jsonResponsePost);
+
+                        // Effacez les valeurs du formulaire
+                        document.getElementById("newEventName").value = "";
+                        document.getElementById("newEventDescription").value = "";
+                        dateOptionsInput.value = "";
 
                         // Traitement de la réponse réussie ici, par exemple, redirection ou affichage d'un message de succès
                     } else {
@@ -103,10 +112,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             tableHead.appendChild(tableHeadRow);
             table.appendChild(tableHead);
             table.appendChild(bodyTable);
-            eventDiv.appendChild(tableEvent);
-            tableEvent.appendChild(table);
             eventDiv.appendChild(eventName);
-            eventDiv.appendChild(eventDescription);
+            eventDiv.appendChild(eventDescription); // Ajoutez le titre et la description ici
+            tableEvent.appendChild(table);
+            eventDiv.appendChild(tableEvent);
 
             console.log("Avant d'ajouter eventDiv au DOM");
             menu.appendChild(eventDiv);
@@ -151,3 +160,23 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Gérer l'erreur, afficher un message à l'utilisateur, etc.
     }
 });
+
+// ADD DATE
+const addDateButton = document.getElementById('addDate');
+if (addDateButton) {
+    addDateButton.addEventListener('click', () => {
+        newDate();
+    });
+}
+
+function newDate() {
+    const dateOptionsContainer = document.getElementById('alldatesubmit');
+
+    if (dateOptionsContainer) {
+        const newDateInput = document.createElement('input');
+        newDateInput.type = 'date';
+        dateOptionsContainer.appendChild(newDateInput);
+    } else {
+        console.error("Date options container not found in the DOM.");
+    }
+}
