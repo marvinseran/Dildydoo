@@ -1,102 +1,103 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+input,
+h1,
+h5,
+.disp,
+.DispBtn {
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vanilla:hover {
-  filter: drop-shadow(0 0 2em #f7df1eaa);
+body {
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
 }
 
-.card {
-  padding: 2em;
+.greenDisp {
+  color: #599208;
 }
 
-.read-the-docs {
-  color: #888;
+.redDisp {
+  color: #c72121;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+/* USERS AVAILABILITY INPUTS */
+.sendBtnAndInputNameDiv,
+.inputsBtns {
+  padding-top: 12px;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.sendBtn {
+  height: 32px;
+  width: 52px;
+  background-color: antiquewhite;
+  transform: translateY(4px);
 }
- .tableinfo{
-  display: none;
- }
- .submitpoll{
+
+.inputsBtns {
+  background-color: aliceblue;
+  background-size: contain;
+}
+
+.dispBtn {
+  background: transparent;
+  height: 21px;
+  width: 34px;
+  margin-left: 6px;
+  margin-right: 6px;
+  transform: translateY(8px);
+}
+
+/* GRID */
+.bigGrid {
+  display: grid;
+  gap: 1px;
+}
+
+h5 {
+  font-weight: normal;
+  font-size: 18px;
+  grid-row: 1;
+  padding: 4px;
+}
+
+h6 {
+  font-weight: normal;
+  font-size: 18px;
+  grid-column: 1;
+  padding: 4px 12px;
+  border: 1px solid black;
+}
+
+.flexCenter {
   display: flex;
- }
+  justify-content: center;
+}
+
+/* BTNS edit add_dates delete */
+.editEventBtn {
+  background-color: aqua;
+  width: 72px;
+}
+
+.addDatesBtn {
+  background: aqua;
+  width: 90px;
+}
+
+.deleteEventBtn {
+  background: aqua;
+}
+
+.editEventBtn,
+.addDatesBtn,
+.deleteEventBtn {
+  height: 32px;
+  transform: translateY(8px);
+}
+
+#dateInputsContainer {
+  max-height: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}/*# sourceMappingURL=style.css.map */

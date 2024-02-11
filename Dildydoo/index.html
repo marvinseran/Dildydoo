@@ -5,7 +5,8 @@
     <!--<link rel="icon" type="image/svg+xml" href="/vite.svg" />-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <script defer src="test.js" type="module"></script>
+
+    <script defer src="test.js"></script>
     <title>Dildydoo App by Hanen & Marvin</title>
   </head>
 
@@ -14,13 +15,26 @@
 
       <img class="logobanner" src="assets/logo.png">
       <h1>Dildydoo App by Hanen & Marvin</h1>
-      <div class="headPoll">
-      <form id="form">
-
-        <label>Event Name:</label>
-        <input type="text" id="newEventName" required>
-
-        <label>Author :</label>
+       <main>
+        <form class="flexCenter" id="newEventForm">
+          <input id="newEventName" type="text" placeholder="Event name" />
+  
+          <div id="dateInputsContainer">
+            <div>
+              <input id="dateOptions" class="newEventDates" type="date" />
+              <button id="addDatesBtn">Add Dates</button>
+            </div>
+          </div>
+  
+          <input id="newEventAuthor" type="text" placeholder="Author" />
+          <input id="newEventDescription" type="text" placeholder="Description" />
+          <button id="newEventSubmit" type="submit" value="" > add event </button>
+        </form>
+  
+        <section id="pollContainer"></section>
+      </main>
+      <!--
+      <abel>
         <input type="text" id="newEventAuthor" required>
 
         <label>Description :</label>
@@ -29,10 +43,10 @@
           <label for="dateOptions">Date Options :</label>
           <input type="date" id="dateOptions" required>
 
-        <!-- Add the "submitpoll" button -->
+        
         </div>
         <button type="button" id="addDate">Add Date</button>
-        <button type="submit" id="btnEvent">Add Event</button>
+        <button type="submit" id="btnEvent" class = "submitpoll">Add Event</button>
       </form>
     </div>
     <div id="pollContainer"></div>
@@ -46,13 +60,13 @@
         <tbody>
           <td>
 
-   <!--X  <div id="eventSelected"></div>  -->
+  
             <input type="text" id="nameInputMore" placeholder="Enter name" required>
             <button type="button" id="submitNameMore">Add</button>
           </td>
         </tfoot>
       </table>
     </div>
-    
+   -->
   </body>
 </html>

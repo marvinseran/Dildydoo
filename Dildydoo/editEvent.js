@@ -1,6 +1,6 @@
 export async function editEvent(title, username, description) {
     try {
-       let response = await fetch('http://localhost:3000/api/events/38b643aeb883', {
+       let response = await fetch('http://localhost:3000/api/events/${id}', {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'

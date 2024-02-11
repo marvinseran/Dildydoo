@@ -1,3 +1,5 @@
+
+
 let eventAuthor;
 document.getElementById('submitpoll').addEventListener('click', createSchedulePoll);
 document.getElementById('addDate').addEventListener('click', newDate);

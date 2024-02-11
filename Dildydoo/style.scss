@@ -1,0 +1,101 @@
+input,
+h1,
+h5,
+.disp,
+.DispBtn {
+  text-align: center;
+}
+body {
+    height: 100vh;
+    width: 100vw;
+  
+    overflow-x: hidden;
+  }
+  
+  .greenDisp {
+    color: #599208;
+  }
+  .redDisp {
+    color: #c72121;
+  }
+
+  /* USERS AVAILABILITY INPUTS */
+.sendBtnAndInputNameDiv,
+.inputsBtns {
+  padding-top: 12px;
+}
+.sendBtn {
+  height: 32px;
+  width: 52px;
+  background-color: antiquewhite;
+transform: translateY(4px);
+}
+.inputsBtns {
+  background-color: aliceblue;
+  background-size: contain;
+}
+.dispBtn {
+  background: transparent;
+  height: 21px;
+  width: 34px;
+
+  margin-left: 6px;
+  margin-right: 6px;
+
+  transform: translateY(8px);
+}
+
+/* GRID */
+.bigGrid {
+    display: grid;
+    gap: 1px;
+  }
+  h5 {
+    font-weight: normal;
+    font-size: 18px;
+  
+    grid-row: 1;
+  
+    padding: 4px;
+  }
+  h6 {
+    font-weight: normal;
+    font-size: 18px;
+  
+    grid-column: 1;
+  
+    padding: 4px 12px;
+    border: 1px solid black;
+  }
+
+  .flexCenter {
+    display: flex;
+    justify-content: center;
+  }
+
+  /* BTNS edit add_dates delete */
+.editEventBtn {
+  background-color: aqua;
+  width: 72px;
+}
+.addDatesBtn {
+  background: aqua;
+  width: 90px;
+}
+.deleteEventBtn {
+  background: aqua;
+    
+}
+.editEventBtn,
+.addDatesBtn,
+.deleteEventBtn {
+  height: 32px;
+
+  transform: translateY(8px);
+}
+#dateInputsContainer {
+    max-height: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
